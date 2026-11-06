@@ -2,7 +2,47 @@ vim.pack.add({
 	"https://github.com/nvim-lualine/lualine.nvim",
 })
 
-require("lualine").setup({})
+local c = {
+	dark = "#1f1f28",
+	fg = "#dcd7ba",
+	dim = "#727169",
+	blue = "#7e9cd8",
+	purple = "#957fb8",
+	green = "#98bb6c",
+	red = "#e82424",
+	yellow = "#e6c384",
+	cyan = "#7aa89f",
+}
+
+local function mode(fg, bg)
+	return {
+		a = { fg = fg, bg = bg, gui = "bold" },
+		b = { fg = bg },
+		c = { fg = c.fg },
+	}
+end
+
+local theme = {
+	normal = mode(c.dark, c.blue),
+	insert = mode(c.dark, c.green),
+	visual = mode(c.dark, c.purple),
+	replace = mode(c.dark, c.red),
+	command = mode(c.dark, c.yellow),
+	terminal = mode(c.dark, c.cyan),
+	inactive = {
+		a = { fg = c.dim },
+		b = { fg = c.dim },
+		c = { fg = c.dim },
+	},
+}
+
+require("lualine").setup({
+	options = {
+		theme = theme,
+		section_separators = "",
+		component_separators = "",
+	},
+})
 
 -- local colors = {
 -- 	bg = "#51afef",
